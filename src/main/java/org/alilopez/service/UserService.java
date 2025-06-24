@@ -7,10 +7,16 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class UserService {
-    private final UserRepository userRepo = new UserRepository();
-
+    private final UserRepository userRepo;
+    public UserService(UserRepository userRepo) {
+        this.userRepo = userRepo;
+    }
     public List<User> getAllUsers() throws SQLException {
         return userRepo.findAll();
+    }
+
+    public User getByIdUser(int idUser) throws SQLException {
+        return userRepo.findByIdUser(idUser);
     }
 
     public void createUser(User user) throws SQLException {
