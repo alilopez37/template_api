@@ -1,16 +1,16 @@
 package org.alilopez.model;
 
 public class User {
-    private int id;
+    private int idUser;
     private String name;
     private String email;
 
-    public int getId() {
-        return id;
+    public int getIdUser() {
+        return idUser;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int idUser) {
+        this.idUser = idUser;
     }
 
     public String getName() {

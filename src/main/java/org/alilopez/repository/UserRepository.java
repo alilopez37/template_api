@@ -13,14 +13,14 @@ import java.util.List;
 public class UserRepository {
     public List<User> findAll() throws SQLException {
         List<User> users = new ArrayList<>();
-        String query = "SELECT * FROM users";
+        String query = "SELECT * FROM user";
         try (
                 Connection conn = DatabaseConfig.getDataSource().getConnection();
                 PreparedStatement stmt = conn.prepareStatement(query);
                 ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 User u = new User();
-                u.setId(rs.getInt("id"));
+                u.setId(rs.getInt("idUser"));
                 u.setName(rs.getString("name"));
                 u.setEmail(rs.getString("email"));
                 users.add(u);
@@ -30,7 +30,7 @@ public class UserRepository {
     }
 
     public void save(User user) throws SQLException {
-        String query = "INSERT INTO users (name, email) VALUES (?, ?)";
+        String query = "INSERT INTO user (name, email) VALUES (?, ?)";
         try (Connection conn = DatabaseConfig.getDataSource().getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, user.getName());
