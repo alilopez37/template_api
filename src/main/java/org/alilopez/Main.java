@@ -20,5 +20,6 @@ public class Main {
         app.get("/", ctx -> ctx.result("API Javalin 2"));
 
         AppModule.initUser().register(app);
+        AppModule.initProducts().register(app);
     }
 }
