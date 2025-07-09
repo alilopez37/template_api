@@ -31,7 +31,8 @@ public class ProductController {
             List<Product> products = productService.getAll();
             ctx.json(products);
         } catch (SQLException e) {
-            ctx.status(500).result("Error al obtener usuarios");
+            System.out.println(e.getMessage());
+            ctx.status(500).result("Error al obtener productos");
         }
     }
 }
