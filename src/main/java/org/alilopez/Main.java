@@ -1,6 +1,7 @@
 package org.alilopez;
 
 import io.javalin.Javalin;
+import io.javalin.http.staticfiles.Location;
 import io.javalin.plugin.bundled.CorsPluginConfig;
 import org.alilopez.di.AppModule;
 
@@ -10,6 +11,12 @@ public class Main {
         Javalin app = Javalin.create(config -> {
             config.bundledPlugins.enableCors(cors -> {
                 cors.addRule(CorsPluginConfig.CorsRule::anyHost);
+            });
+            config.staticFiles.add(staticFiles -> {
+                staticFiles.hostedPath = "/uploads";         // URL pública
+                staticFiles.directory = "uploads";           // Ruta física en el disco
+                staticFiles.location = Location.EXTERNAL;    // Es una ruta fuera del classpath
+                staticFiles.precompress = false;
             });
         }).start(7000);
 

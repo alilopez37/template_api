@@ -19,6 +19,11 @@ public class ProductService {
         productRepo.save(product);
     }
 
+    public void createWithImage(Product product) throws SQLException {
+        // Podrías validar aquí si el email ya existe, etc.
+        productRepo.saveWithImage(product);
+    }
+
     public List<Product> getAll() throws SQLException {
         return productRepo.findAll();
     }

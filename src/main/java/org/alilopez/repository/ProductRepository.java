@@ -23,6 +23,18 @@ public class ProductRepository {
         }
     }
 
+    public void saveWithImage(Product product) throws SQLException {
+        String query = "INSERT INTO product (name, stock, price, url_image) VALUES (?, ?, ?, ?)";
+        try (Connection conn = DatabaseConfig.getDataSource().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, product.getName());
+            stmt.setInt(2, product.getStock());
+            stmt.setFloat(3, product.getPrice());
+            stmt.setString(4, product.getUrl_image());
+            stmt.executeUpdate();
+        }
+    }
+
     public List<Product> findAll() throws SQLException {
         List<Product> products = new ArrayList<>();
         String query = "SELECT * FROM product";
@@ -36,6 +48,7 @@ public class ProductRepository {
                 p.setName(rs.getString("name"));
                 p.setStock(rs.getInt("stock"));
                 p.setPrice(rs.getFloat("price"));
+                p.setUrl_image(rs.getString("url_image"));
                 products.add(p);
             }
         }
