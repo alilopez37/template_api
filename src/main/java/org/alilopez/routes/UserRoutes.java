@@ -13,7 +13,7 @@ public class UserRoutes {
         app.post("/users", userController::create);
         app.get("/users/{id}", userController::getById);
         // Ejemplo de más rutas:
-        // app.put("/users/:id", userController::update);
-        // app.delete("/users/:id", userController::delete);
+        // app.put("/users/{id}", userController::update);
+        // app.delete("/users/{id}", userController::delete);
     }
 }

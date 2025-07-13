@@ -20,7 +20,8 @@ public class UserController {
             List<User> users = userService.getAllUsers();
             ctx.json(users);
         } catch (SQLException e) {
-            ctx.status(500).result("Error al obtener usuarios");
+            System.out.println(e.getMessage());
+            ctx.status(400).result("Error al obtener usuarios");
         }
     }
 

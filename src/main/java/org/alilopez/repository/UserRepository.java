@@ -21,7 +21,7 @@ public class UserRepository {
             while (rs.next()) {
                 User u = new User();
                 u.setId(rs.getInt("id"));
-                u.setName(rs.getString("name"));
+                u.setUsername(rs.getString("username"));
                 u.setEmail(rs.getString("email"));
                 users.add(u);
             }
@@ -42,7 +42,7 @@ public class UserRepository {
                 if (rs.next()) {
                     user = new User();
                     user.setId(rs.getInt("id"));
-                    user.setName(rs.getString("name"));
+                    user.setUsername(rs.getString("username"));
                     user.setEmail(rs.getString("email"));
                 }
             }
@@ -52,10 +52,10 @@ public class UserRepository {
     }
 
     public void save(User user) throws SQLException {
-        String query = "INSERT INTO users (name, email) VALUES (?, ?)";
+        String query = "INSERT INTO users (username, email) VALUES (?, ?)";
         try (Connection conn = DatabaseConfig.getDataSource().getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setString(1, user.getName());
+            stmt.setString(1, user.getUsername());
             stmt.setString(2, user.getEmail());
             stmt.executeUpdate();
         }
