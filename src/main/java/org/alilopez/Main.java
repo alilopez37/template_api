@@ -14,9 +14,11 @@ public class Main {
         }).start(7000);
 
         // Rutas generales
-        app.get("/", ctx -> ctx.result("API Javalin 2"));
+        app.get("/", ctx -> ctx.result("API Javalin"));
 
         AppModule.initUser().register(app);
         AppModule.initProducts().register(app);
+        AppModule.initVentas().register(app);
+        AppModule.initStats().register(app);
     }
 }

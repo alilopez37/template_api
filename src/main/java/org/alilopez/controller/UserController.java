@@ -2,6 +2,8 @@ package org.alilopez.controller;
 
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
+import org.alilopez.dto.UserDTO;
+import org.alilopez.mapper.UserMapper;
 import org.alilopez.model.User;
 import org.alilopez.service.UserService;
 
@@ -18,7 +20,12 @@ public class UserController {
     public void getAll(Context ctx) {
         try {
             List<User> users = userService.getAllUsers();
-            ctx.json(users);
+            // ---------------------------
+            var dtoList = users.stream()
+                    .map(UserMapper::toDTO)
+                    .toList();
+            ctx.json(dtoList);
+            // ---------------------------
         } catch (SQLException e) {
             ctx.status(500).result("Error al obtener usuarios");
         }
@@ -42,6 +49,9 @@ public class UserController {
         try {
             User user = ctx.bodyAsClass(User.class);
             userService.createUser(user);
+            //UserDTO dto = ctx.bodyAsClass(UserDTO.class);
+            //userService.createUser(UserMapper.toEntity(dto));
+
             ctx.status(201).result("Usuario creado");
         } catch (Exception e) {
             ctx.status(400).result("Error al crear usuario");
